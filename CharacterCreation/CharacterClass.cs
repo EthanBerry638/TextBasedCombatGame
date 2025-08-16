@@ -1,4 +1,4 @@
-namespace TextBasedCombat.Classes
+namespace TextBasedCombat.CharacterCreation
 {
     public enum CharacterClass
     {
