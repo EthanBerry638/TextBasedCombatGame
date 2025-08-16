@@ -1,16 +1,17 @@
 using TextBasedCombat.Entities;
+using TextBasedCombat.Utils;
 
 // Character creation menus and creation functions
 
 namespace TextBasedCombat.CharacterCreation
 {
-    public class CharacterCreation
+    public class CharacterCreator
     {
         public string? readInput { get; private set; } 
         public bool firstFight { get; private set; }
         private readonly Random random;
 
-        public CharacterCreation(Random sharedRandom)
+        public CharacterCreator(Random sharedRandom)
         {
             random = sharedRandom;
         }
@@ -18,11 +19,11 @@ namespace TextBasedCombat.CharacterCreation
         public Player CharacterCreationMenu()
         {
             bool input = false;
-            Player player = null;
+            Player player = null!;
             while (!input)
             {
                 Console.WriteLine("\nWould you like to use a random, default character? Or create your own?\n\n");
-                Utils.Pause(500);
+                Helper.Pause(500);
                 Console.WriteLine("1. Default\n2. Custom");
                 readInput = Console.ReadLine();
                 if (readInput != null)
@@ -58,7 +59,7 @@ namespace TextBasedCombat.CharacterCreation
             int attackPower = 0;
 
             Console.WriteLine("Please enter the name for your character: ");
-            Utils.Pause(500);
+            Helper.Pause(500);
             nameChoice = Console.ReadLine()?.Trim();
 
             if (string.IsNullOrWhiteSpace(nameChoice))
@@ -75,7 +76,7 @@ namespace TextBasedCombat.CharacterCreation
             while (!validClass)
             {
                 Console.WriteLine("What class would you like to make your character? Please enter a number from the list below...");
-                Utils.Pause(1000);
+                Helper.Pause(1000);
                 PrintClasses();
 
                 int choice;
@@ -137,9 +138,9 @@ namespace TextBasedCombat.CharacterCreation
             int chosen = random.Next(0, listCount);
 
             Console.WriteLine("\nYour default character has been created!\n");
-            Utils.Pause(500);
+            Helper.Pause(500);
             Console.WriteLine($"Their name is {defaultCharacters[chosen].Name}! They have {defaultCharacters[chosen].Health} health and {defaultCharacters[chosen].AttackPower} attack power!\n");
-            Utils.Pause(1000);
+            Helper.Pause(1000);
 
             return defaultCharacters[chosen];
         }
