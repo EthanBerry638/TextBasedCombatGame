@@ -24,8 +24,8 @@ namespace TextBasedCombat.Combat
                 Console.WriteLine($"Uh oh... {enemy.Name} caught you");
                 Console.WriteLine("You died at their hands...\nGame over\nPress enter to exit...");
                 Flags.exitMain = true;
-                Console.ReadLine();
             }
+            Console.ReadLine();
         }
     }
 }

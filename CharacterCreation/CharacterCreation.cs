@@ -140,7 +140,7 @@ namespace TextBasedCombat.CharacterCreation
 
             Console.WriteLine("\nYour default character has been created!\n");
             Helper.Pause(500);
-            Console.WriteLine($"Their name is {defaultCharacters[chosen].Name}! They have {defaultCharacters[chosen].Health} health and {defaultCharacters[chosen].AttackPower} attack power! They start at {defaultCharacters[chosen].Level}.\n");
+            Console.WriteLine($"Their name is {defaultCharacters[chosen].Name}! They have {defaultCharacters[chosen].Health} health and {defaultCharacters[chosen].AttackPower} attack power! They start at level 1.\n");
             Helper.Pause(1000);
 
             return defaultCharacters[chosen];

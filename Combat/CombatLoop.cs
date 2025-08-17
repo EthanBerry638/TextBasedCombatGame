@@ -17,7 +17,6 @@ namespace TextBasedCombat.Combat
             }
 
             Console.WriteLine(player.IsAlive() ? "\nYou win!\n" : "\nYou were defeated...\n");
-            Console.ReadKey(true);
             if (!player.IsAlive())
             {
                 Flags.exitMain = true;
@@ -27,6 +26,7 @@ namespace TextBasedCombat.Combat
                 player.GainXP(1);
                 Console.WriteLine($"{player.Name} gained XP. Current XP: {player.XP}");
             }
+            Console.ReadKey(true);
             return player.IsAlive(); // true if player won, false if defeated
         }
     }

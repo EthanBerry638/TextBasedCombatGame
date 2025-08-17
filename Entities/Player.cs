@@ -12,7 +12,7 @@ namespace TextBasedCombat.Entities
         public int AttackPower { get; set; }
         public int CritChance { get; set; } = 20;
         public double CritMultiplier { get; set; } = 2.0;
-        public int Level { get; set; } = 0;
+        public int Level { get; set; } = 1;
         public int XP { get; set; } = 0;
 
         public Player(string name, int health, int attackPower)
