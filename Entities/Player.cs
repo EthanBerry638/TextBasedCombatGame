@@ -1,4 +1,5 @@
 using System;
+using TextBasedCombat.Utils;
 
 namespace TextBasedCombat.Entities
 {
@@ -24,7 +25,7 @@ namespace TextBasedCombat.Entities
             int damage = isCrit ? (int)(AttackPower * CritMultiplier) : AttackPower;
 
             Console.WriteLine($"{Name} attacks {enemy.Name} for {damage} damage{(isCrit ? " (CRITICAL HIT!)" : "")}!");
-            Utils.Pause(500);
+            Helper.Pause(500);
             enemy.TakeDamage(damage);
         }
 
