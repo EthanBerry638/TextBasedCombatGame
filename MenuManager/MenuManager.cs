@@ -97,8 +97,17 @@ namespace TextBasedCombat.MenuManager
                     return true;
 
                 case 3:
-                    ViewCharacterStats();
-                    return true;
+                    try
+                    {
+                        ViewCharacterStats();
+                        return true;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Console.WriteLine("Null reference exception. Player has not been set yet. Return to main by pressing enter...");
+                        Console.ReadLine();
+                        return true;
+                    }
 
                 case 4:
                     Tutorial();
@@ -123,7 +132,7 @@ namespace TextBasedCombat.MenuManager
         {
             Console.Clear();
             Console.WriteLine($"Your character {player.Name} current stats are: ");
-            Console.WriteLine($"Health: {player.Health}\nAttack Power: {player.AttackPower}");
+            Console.WriteLine($"Health: {player.Health}\nAttack Power: {player.AttackPower}\nTheir level is {player.Level}\n");
             Console.WriteLine("Press any key to return to main...");
             Console.ReadLine();
         }

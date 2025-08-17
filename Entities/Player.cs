@@ -72,11 +72,17 @@ namespace TextBasedCombat.Entities
             }
         }
 
-        private void LevelUp()
+        public void LevelUp()
         {
+            int healthModifier;
+            int attackPowerModifier;
             XP = 0;
             Level += 1;
-            Console.WriteLine($"{Name} levelled up! Your level is now {Level}.");
+            attackPowerModifier = Level * 3;
+            healthModifier = Level * 3;
+            Health += healthModifier;
+            AttackPower += attackPowerModifier;
+            Console.WriteLine($"{Name} levelled up! Your level is now {Level}.\nYour health increased by {healthModifier} and your attack power increased by {attackPowerModifier}.\nYour health is now {Health} and your attack power is {AttackPower}.");
         }
     }
 }
