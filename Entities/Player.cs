@@ -14,6 +14,7 @@ namespace TextBasedCombat.Entities
         public double CritMultiplier { get; set; } = 2.0;
         public int Level { get; set; } = 1;
         public int XP { get; set; } = 0;
+        public List<string> Potions = new List<string> { };
 
         public Player(string name, int health, int attackPower)
         {
@@ -83,6 +84,11 @@ namespace TextBasedCombat.Entities
             Health += healthModifier;
             AttackPower += attackPowerModifier;
             Console.WriteLine($"{Name} levelled up! Your level is now {Level}.\nYour health increased by {healthModifier} and your attack power increased by {attackPowerModifier}.\nYour health is now {Health} and your attack power is {AttackPower}.");
+        }
+
+        public void AddPotions()
+        {
+            
         }
     }
 }
