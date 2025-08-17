@@ -14,7 +14,7 @@ namespace TextBasedCombat.Entities
         public double CritMultiplier { get; set; } = 2.0;
         public int Level { get; set; } = 1;
         public int XP { get; set; } = 0;
-        public List<string> Potions = new List<string> { };
+        public List<Potion> Potions = new List<Potion> { };
         public bool IsEmpty { get; set; }
 
         public Player(string name, int health, int attackPower)
@@ -100,13 +100,49 @@ namespace TextBasedCombat.Entities
         {
             Console.WriteLine("Potions: \n");
             Helper.Pause(200);
-            foreach (string item in Potions)
+            if (Potions.Count == 0)
             {
-                int count = 0;
-                Console.WriteLine((count += 1) + "." + item);
+                Console.WriteLine("There are no potions in the inventory.");
+            }
+            else
+            {
+                for (int i = 0; i < Potions.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {Potions[i].Name}");
+                }
             }
             Console.WriteLine("Please press Enter to return to main menu...");
             Console.ReadLine();
+        }
+
+        public void UsePotion()
+        {
+            while (true)
+            {
+                ViewInventory();
+
+                if (Potions.Count == 0)
+                {
+                    return;
+                }
+
+                Console.WriteLine("Enter the number of the potion to use: ");
+                string? input = Console.ReadLine();
+
+                if (!int.TryParse(input, out int choice) || choice < 1 || choice > Potions.Count)
+                {
+                    Console.WriteLine("That's not a valid choice. Try again.\n");
+                    continue;
+                }
+
+                var selectedPotion = Potions[choice - 1];
+                // TODO: make applyeffect function selectedPotion.ApplyEffect();
+                Potions.RemoveAt(choice - 1);
+
+                Console.WriteLine($"You used {selectedPotion.Name}!");
+                Helper.Pause(500);
+                return;
+            }
         }
     }
 }
