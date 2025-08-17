@@ -19,7 +19,6 @@ A simple C# sonsole game where players battle against random enemies.
 ##  Roadmap
 
 -Add inventory system (potions)
--Refactor into classes and namespaces
 -Implement leveling and experience 
 -Optional -UI expansion (Winforms/WPF)
 

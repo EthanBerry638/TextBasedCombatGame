@@ -4,6 +4,7 @@ using TextBasedCombat.CharacterCreation;
 using TextBasedCombat.Entities;
 using TextBasedCombat.Utils;
 using TextBasedCombat.Combat;
+using TextBasedCombat.GlobalFlags;
 
 namespace TextBasedCombat.MenuManager
 {
@@ -15,7 +16,6 @@ namespace TextBasedCombat.MenuManager
         string? readInput { get; set; }
         bool hasPlayed { get; set; }
         private bool firstFight;
-        bool exitMain { get; set; }
 
         public MenuManager(Player player, Random sharedRandom)
         {
@@ -26,20 +26,20 @@ namespace TextBasedCombat.MenuManager
 
         public void MainMenu()
         {
-            while (!exitMain)
-            {
-                DisplayMainMenu();
-
-                bool validInput = false;
-                while (!validInput)
+            while (!Flags.exitMain)
                 {
-                    int choice = GetMainMenuChoice();
-                    if (choice != -1)
+                    DisplayMainMenu();
+
+                    bool validInput = false;
+                    while (!validInput)
                     {
-                        validInput = HandleMainMenuChoice(choice);
+                        int choice = GetMainMenuChoice();
+                        if (choice != -1)
+                        {
+                            validInput = HandleMainMenuChoice(choice);
+                        }
                     }
                 }
-            }
         }
         private void DisplayMainMenu()
         {
@@ -109,7 +109,7 @@ namespace TextBasedCombat.MenuManager
                     return true;
 
                 case 6:
-                    exitMain = true;
+                    Flags.exitMain = true;
                     Console.WriteLine("Thank you for playing my turn based RPG game!");
                     return true;
 

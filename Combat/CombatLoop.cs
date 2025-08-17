@@ -1,4 +1,5 @@
 using TextBasedCombat.Entities;
+using TextBasedCombat.GlobalFlags;
 
 namespace TextBasedCombat.Combat
 {
@@ -16,6 +17,11 @@ namespace TextBasedCombat.Combat
             }
 
             Console.WriteLine(player.IsAlive() ? "\nYou win!\n" : "\nYou were defeated...\n");
+            Console.ReadKey(true);
+            if (!player.IsAlive())
+            {
+                Flags.exitMain = true;
+            }
             return player.IsAlive(); // true if player won, false if defeated
         }
     }
