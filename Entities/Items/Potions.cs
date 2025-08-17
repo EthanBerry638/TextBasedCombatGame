@@ -23,11 +23,6 @@ namespace TextBasedCombat.Entities
             Value = value;
             Description = description;
         }
-
-        public void ApplyEffect()
-        {
-        }
-
         public string PrintPotion()
         {
             string potionNameAndDescription = $"";
