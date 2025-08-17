@@ -15,6 +15,7 @@ namespace TextBasedCombat.Entities
         public int Level { get; set; } = 1;
         public int XP { get; set; } = 0;
         public List<string> Potions = new List<string> { };
+        public bool IsEmpty { get; set; }
 
         public Player(string name, int health, int attackPower)
         {
@@ -86,9 +87,26 @@ namespace TextBasedCombat.Entities
             Console.WriteLine($"{Name} levelled up! Your level is now {Level}.\nYour health increased by {healthModifier} and your attack power increased by {attackPowerModifier}.\nYour health is now {Health} and your attack power is {AttackPower}.");
         }
 
-        public void AddPotions()
+        public bool IsInventoryEmpty()
         {
-            
+            if (Potions.Count == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void ViewInventory()
+        {
+            Console.WriteLine("Potions: \n");
+            Helper.Pause(200);
+            foreach (string item in Potions)
+            {
+                int count = 0;
+                Console.WriteLine((count += 1) + "." + item);
+            }
+            Console.WriteLine("Please press Enter to return to main menu...");
+            Console.ReadLine();
         }
     }
 }

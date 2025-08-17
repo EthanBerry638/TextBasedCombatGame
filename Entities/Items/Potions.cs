@@ -28,7 +28,7 @@ namespace TextBasedCombat.Entities
         {
         }
 
-        public string ToString()
+        public string PrintPotion()
         {
             string potionNameAndDescription = $"";
             return potionNameAndDescription;

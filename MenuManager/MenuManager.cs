@@ -13,6 +13,7 @@ namespace TextBasedCombat.MenuManager
         private Player player;
         private Random sharedRandom;
         private CharacterCreator creator;
+        private Potion potion;
         string? readInput { get; set; }
         bool hasPlayed { get; set; }
         private bool firstFight;
@@ -48,7 +49,8 @@ namespace TextBasedCombat.MenuManager
             Console.WriteLine($"{(hasPlayed ? Helper.StrikeThrough("1. New game") : "1. New game")}");
             Console.WriteLine($"{(!hasPlayed ? Helper.StrikeThrough("2. Continue game") : "2. Continue game")}");
             Console.WriteLine($"{(!hasPlayed ? Helper.StrikeThrough("3. View character stats") : "3. View character stats")}");
-            Console.WriteLine("4. Tutorial\n5. Credits/Lore\n6. Exit");
+            Console.WriteLine($"{(!hasPlayed || player.IsInventoryEmpty() ? Helper.StrikeThrough("4. View character inventory") : "4. View character inventory")}"); 
+            Console.WriteLine("5. Tutorial\n6. Credits/Lore\n7. Exit");
             Helper.Pause(2000);
             Console.WriteLine("\nPlease select a number from the list above!");
         }
@@ -71,9 +73,9 @@ namespace TextBasedCombat.MenuManager
         }
         bool HandleMainMenuChoice(int choice)
         {
-            switch (choice)
+            switch (choice) // TODO: Refactor using enums. Magic numbers
             {
-                case 1:
+                case 1: // New game
                     if (hasPlayed)
                     {
                         Console.WriteLine("You already have a save file...\nPlease select continue.");
@@ -85,8 +87,7 @@ namespace TextBasedCombat.MenuManager
                     firstFight = creator.firstFight;
                     EncounterSetup.SetupEncounter(player, creator, sharedRandom, ref firstFight);
                     return true;
-
-                case 2:
+                case 2: // Continue
                     if (!hasPlayed)
                     {
                         Console.WriteLine("You don't currently have a save file...\nPlease select new game.");
@@ -95,8 +96,7 @@ namespace TextBasedCombat.MenuManager
                     }
                     EncounterSetup.SetupEncounter(player, creator, sharedRandom, ref firstFight);
                     return true;
-
-                case 3:
+                case 3: // View character stats
                     try
                     {
                         ViewCharacterStats();
@@ -108,20 +108,28 @@ namespace TextBasedCombat.MenuManager
                         Console.ReadLine();
                         return true;
                     }
-
-                case 4:
+                case 4: // View character inventory
+                    try
+                    {
+                        player.ViewInventory();
+                        return true;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Console.WriteLine("Null reference exception. Nothing in inventory. Return to main by pressing enter...");
+                        Console.ReadLine();
+                        return true;
+                    }
+                case 5: // Tutorial
                     Tutorial();
                     return true;
-
-                case 5:
+                case 6: // CreditsAndLore
                     CreditsAndLore();
                     return true;
-
-                case 6:
+                case 7: // Exit main menu
                     Flags.exitMain = true;
                     Console.WriteLine("Thank you for playing my turn based RPG game!");
                     return true;
-
                 default:
                     Console.WriteLine("Please enter a valid number from the list.");
                     return false;
