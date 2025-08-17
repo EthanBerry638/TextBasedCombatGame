@@ -8,7 +8,7 @@ namespace TextBasedCombat.CharacterCreation
 {
     public class CharacterCreator
     {
-        public string? readInput { get; private set; } 
+        public string? readInput { get; private set; }
         public bool firstFight { get; private set; }
         private readonly Random random;
 
@@ -119,11 +119,9 @@ namespace TextBasedCombat.CharacterCreation
                 }
             }
 
-            int level = 1;
+            Console.WriteLine($"You have chosen class {classChoice} with {health} health and {attackPower} attack power! They start at level 1.\n");
 
-            Console.WriteLine($"You have chosen class {classChoice} with {health} health and {attackPower} attack power! They start at level {level}.\n");
-
-            return new Player(nameChoice, health, attackPower, level);
+            return new Player(nameChoice, health, attackPower);
         }
 
         private Player CreateDefault()
@@ -131,10 +129,10 @@ namespace TextBasedCombat.CharacterCreation
             firstFight = true;
             List<Player> defaultCharacters = new List<Player>
             {
-                new Player("Darius", 100, 15, 1),
-                new Player("Gale", 80, 25, 1),
-                new Player("Lora", 120, 10, 1),
-                new Player("Lyra", 90, 20, 1) // Hardcoded level as 1 for now
+                new Player("Darius", 100, 15),
+                new Player("Gale", 80, 25),
+                new Player("Lora", 120, 10),
+                new Player("Lyra", 90, 20) 
             };
 
             int listCount = defaultCharacters.Count;

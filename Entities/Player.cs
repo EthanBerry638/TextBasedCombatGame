@@ -12,15 +12,14 @@ namespace TextBasedCombat.Entities
         public int AttackPower { get; set; }
         public int CritChance { get; set; } = 20;
         public double CritMultiplier { get; set; } = 2.0;
-        public int Level { get; set; }
-        public int XP = 0;
+        public int Level { get; set; } = 0;
+        public int XP { get; set; } = 0;
 
-        public Player(string name, int health, int attackPower, int level)
+        public Player(string name, int health, int attackPower)
         {
             Name = name;
             Health = health;
             AttackPower = attackPower;
-            Level = level;
         }
 
         public void Attack(Enemy enemy, Random random)
@@ -45,13 +44,13 @@ namespace TextBasedCombat.Entities
             return Health > 0;
         }
 
-        public bool IsLevellingUp(Player player)
+        public bool IsLevellingUp()
         {
-            int levelUpThreshold = CalculateLevelUpThreshold(player.Level);
+            int levelUpThreshold = CalculateLevelUpThreshold(this.Level);
 
-            if (player.XP >= levelUpThreshold)
+            if (this.XP >= levelUpThreshold)
             {
-                player.LevelUp(player); 
+                this.LevelUp();
                 return true;
             }
 
@@ -63,15 +62,21 @@ namespace TextBasedCombat.Entities
             return level * 2;
         }
 
-        public int GainXP(Player player)
+        public void GainXP(int amount)
         {
-            return player.XP += 1;
+            XP += amount;
+            int threshold = CalculateLevelUpThreshold(Level);
+            if (XP >= threshold)
+            {
+                LevelUp();
+            }
         }
 
-        public int LevelUp(Player player)
+        private void LevelUp()
         {
-            player.XP = 0;
-            return player.Level += 1;
+            XP = 0;
+            Level += 1;
+            Console.WriteLine($"{Name} levelled up! Your level is now {Level}.");
         }
     }
 }
