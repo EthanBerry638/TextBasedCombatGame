@@ -5,8 +5,7 @@ using TextBasedCombat.Entities;
 using TextBasedCombat.MenuManager;
 
 Random sharedRandom = new Random();
-CharacterCreator creator = new CharacterCreator(sharedRandom);
-Player player = creator.CharacterCreationMenu();
+Player player = null!;
 
 var menuManager = new MenuManager(player, sharedRandom);
 menuManager.MainMenu();
