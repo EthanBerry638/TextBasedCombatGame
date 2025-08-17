@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using TextBasedCombat.Entities;
 using TextBasedCombat.Utils;
 
@@ -118,9 +119,11 @@ namespace TextBasedCombat.CharacterCreation
                 }
             }
 
-            Console.WriteLine($"You have chosen class {classChoice} with {health} health and {attackPower} attack power!\n");
+            int level = 1;
 
-            return new Player(nameChoice, health, attackPower);
+            Console.WriteLine($"You have chosen class {classChoice} with {health} health and {attackPower} attack power! They start at level {level}.\n");
+
+            return new Player(nameChoice, health, attackPower, level);
         }
 
         private Player CreateDefault()
@@ -128,10 +131,10 @@ namespace TextBasedCombat.CharacterCreation
             firstFight = true;
             List<Player> defaultCharacters = new List<Player>
             {
-                new Player("Darius", 100, 15),
-                new Player("Gale", 80, 25),
-                new Player("Lora", 120, 10),
-                new Player("Lyra", 90, 20)
+                new Player("Darius", 100, 15, 1),
+                new Player("Gale", 80, 25, 1),
+                new Player("Lora", 120, 10, 1),
+                new Player("Lyra", 90, 20, 1) // Hardcoded level as 1 for now
             };
 
             int listCount = defaultCharacters.Count;
@@ -139,7 +142,7 @@ namespace TextBasedCombat.CharacterCreation
 
             Console.WriteLine("\nYour default character has been created!\n");
             Helper.Pause(500);
-            Console.WriteLine($"Their name is {defaultCharacters[chosen].Name}! They have {defaultCharacters[chosen].Health} health and {defaultCharacters[chosen].AttackPower} attack power!\n");
+            Console.WriteLine($"Their name is {defaultCharacters[chosen].Name}! They have {defaultCharacters[chosen].Health} health and {defaultCharacters[chosen].AttackPower} attack power! They start at {defaultCharacters[chosen].Level}.\n");
             Helper.Pause(1000);
 
             return defaultCharacters[chosen];

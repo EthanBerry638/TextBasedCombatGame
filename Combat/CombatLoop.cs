@@ -22,6 +22,15 @@ namespace TextBasedCombat.Combat
             {
                 Flags.exitMain = true;
             }
+            else
+            {
+                player.GainXP(player);
+                if (player.IsLevellingUp(player))
+                {
+                    player.LevelUp(player);
+                    Console.WriteLine($"{player.Name} levlelled up! Your level is now {player.Level}");
+                }
+            }
             return player.IsAlive(); // true if player won, false if defeated
         }
     }

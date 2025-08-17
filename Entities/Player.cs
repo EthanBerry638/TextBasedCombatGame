@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics.Tracing;
+using System.Security.Cryptography;
 using TextBasedCombat.Utils;
 
 namespace TextBasedCombat.Entities
@@ -10,12 +12,15 @@ namespace TextBasedCombat.Entities
         public int AttackPower { get; set; }
         public int CritChance { get; set; } = 20;
         public double CritMultiplier { get; set; } = 2.0;
+        public int Level { get; set; }
+        public int XP = 0;
 
-        public Player(string name, int health, int attackPower)
+        public Player(string name, int health, int attackPower, int level)
         {
             Name = name;
             Health = health;
             AttackPower = attackPower;
+            Level = level;
         }
 
         public void Attack(Enemy enemy, Random random)
@@ -38,6 +43,35 @@ namespace TextBasedCombat.Entities
         public bool IsAlive()
         {
             return Health > 0;
+        }
+
+        public bool IsLevellingUp(Player player)
+        {
+            int levelUpThreshold = CalculateLevelUpThreshold(player.Level);
+
+            if (player.XP >= levelUpThreshold)
+            {
+                player.LevelUp(player); 
+                return true;
+            }
+
+            return false;
+        }
+
+        private int CalculateLevelUpThreshold(int level)
+        {
+            return level * 2;
+        }
+
+        public int GainXP(Player player)
+        {
+            return player.XP += 1;
+        }
+
+        public int LevelUp(Player player)
+        {
+            player.XP = 0;
+            return player.Level += 1;
         }
     }
 }

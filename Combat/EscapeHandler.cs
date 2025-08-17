@@ -15,6 +15,12 @@ namespace TextBasedCombat.Combat
             {
                 Console.WriteLine("You succeeded!");
                 Console.WriteLine("That's a relief! Press enter to return to main menu...");
+                player.GainXP(player);
+                if (player.IsLevellingUp(player))
+                {
+                    player.LevelUp(player);
+                    Console.WriteLine($"{player.Name} levlelled up! Your level is now {player.Level}");
+                }
                 Console.ReadLine();
             }
             else
